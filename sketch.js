@@ -1,45 +1,57 @@
+// Buttton hover effect. Need to omit if button is on dark mode.
 const buttons = document.querySelectorAll('.options');
-
 buttons.forEach(element => element.addEventListener('mouseover', () => {
     element.classList.add('hover');
 }));
 buttons.forEach(element => element.addEventListener('mouseleave', () => {
     element.classList.remove('hover')
 }));
+buttons.forEach(element => element.addEventListener('mousedown', () => {
+    if (element.classList.contains('persistent')) {
+        buttons.forEach(element => element.classList.remove('button-click'));
+    }
+    element.classList.add('button-click');
+}));
+buttons.forEach(element => element.addEventListener('mouseup', () => {
+    if (element.classList.contains('persistent')) return
+    element.classList.remove('button-click');
+}));
 
-// let gridDimensions = '500px';
 
-// const pixelGrid = document.createElement('div');
-// pixelGrid.classList.add('pixel-grid');
-// pixelGrid.style.width = gridDimensions;
-// pixelGrid.style.height = gridDimensions;
+let gridDimensions = '350px';
 
-// const gridDivisions = 20;
-// let pixelWidth = parseInt(gridDimensions) / gridDivisions;
-// let pixelHeight = parseInt(gridDimensions) / gridDivisions;
+const pixelGrid = document.createElement('div');
+pixelGrid.classList.add('pixel-grid');
+pixelGrid.style.width = gridDimensions;
+pixelGrid.style.height = gridDimensions;
 
-// let mouseDown = false;
-// document.body.onmousedown = () => (mouseDown = true);
-// document.body.onmouseup = () => (mouseDown = false);
+const gridDivisions = 20;
+let pixelWidth = parseInt(gridDimensions) / gridDivisions;
+let pixelHeight = parseInt(gridDimensions) / gridDivisions;
 
-// function changeColor(e) {
-//     if (e.type === 'mouseover' && !mouseDown) return
-//     e.target.style.backgroundColor = 'black';
-// }
+let mouseDown = false;
+document.body.onmousedown = () => (mouseDown = true);
+document.body.onmouseup = () => (mouseDown = false);
 
-// // Create individual pixels that populates the pixel grid.
-// for (let row = 0; row < gridDivisions; row ++) {
-//     const pixelRow = document.createElement('div');
-//     pixelRow.style.display = 'flex';
-//     for (let i = 0; i < gridDivisions; i++) {
-//         const pixel = document.createElement('div');
-//         pixel.classList.add('pixel');
-//         pixel.style.width = `${pixelWidth}px`;
-//         pixel.style.height = `${pixelHeight}px`;
-//         pixel.addEventListener('mouseover', changeColor);
-//         pixelRow.appendChild(pixel);
-//     }
-//     pixelGrid.appendChild(pixelRow);
-// }
+function changeColor(e) {
+    if (e.type === 'mouseover' && !mouseDown) return
+    e.target.style.backgroundColor = 'black';
+}
 
-// document.body.appendChild(pixelGrid);
+// Create individual pixels that populates the pixel grid.
+for (let row = 0; row < gridDivisions; row ++) {
+    const pixelRow = document.createElement('div');
+    pixelRow.style.display = 'flex';
+    for (let i = 0; i < gridDivisions; i++) {
+        const pixel = document.createElement('div');
+        pixel.classList.add('pixel');
+        pixel.style.width = `${pixelWidth}px`;
+        pixel.style.height = `${pixelHeight}px`;
+        pixel.addEventListener('mouseover', changeColor);
+        pixelRow.appendChild(pixel);
+    }
+    pixelGrid.appendChild(pixelRow);
+}
+
+const gridContainer = document.querySelector('.grid-container');
+gridContainer.appendChild(pixelGrid);

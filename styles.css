@@ -6,12 +6,12 @@
     padding: 50px;
 }
 
-.main-container h1 {
+h1, h3 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .main-container hr {
-    width: 75%;
+    width: 25%;
     height: 1.5px;
     border: 0px;
     background-color: black;
@@ -30,6 +30,7 @@
     flex-direction: column;
     align-items: stretch;
     width: 200px;
+    margin-right: 75px;
 }
 
 /* Default stylings for buttons and input. */
@@ -47,11 +48,17 @@
     border-radius: 5px;
 }
 
+.palette .button-click {
+    border: 1px solid white;
+    color: white;
+    background-color: black;
+}
+
 /* Default input styling. */
 .palette input {
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 5px;
-    box-shadow: inset 5px 5px 0px 0px #e0e0e0;
+    box-shadow: inset 5px 5px 5px 0px rgb(211, 211, 211);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
     font-size: larger;
@@ -71,4 +78,15 @@
 /* Alternative styling for button clicks. */
 .palette .hover {
     font-weight: bold;
+}
+
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pixel-grid {
+    border: 1px solid black;
+    box-shadow: 10px 10px 10px 0px rgb(211, 211, 211);
 }
