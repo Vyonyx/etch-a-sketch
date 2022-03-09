@@ -40,11 +40,6 @@ function getGridDivs() {
     return divValue
 }
 
-// Calculate individual pixel width and heights.
-const gridDivisions = getGridDivs();
-let pixelWidth = totalGridDimensions / gridDivisions;
-let pixelHeight = totalGridDimensions / gridDivisions;
-
 // Color options for pixels.
 function changePixelToBlack(e) {
     if (e.type === 'mouseover' && !mouseDown) return
@@ -118,21 +113,36 @@ function setActiveColorMode() {
 }
 
 // Create individual pixels that populates the pixel grid.
-for (let row = 0; row < gridDivisions; row ++) {
-    const pixelRow = document.createElement('div');
-    pixelRow.style.display = 'flex';
-    for (let i = 0; i < gridDivisions; i++) {
-        const pixel = document.createElement('div');
-        pixel.classList.add('pixel');
-        pixel.style.width = `${pixelWidth}px`;
-        pixel.style.height = `${pixelHeight}px`;
-        pixel.style.backgroundColor = 'rgb(255, 255, 255)';
-        pixel.addEventListener('mouseover', setActiveColorMode);
-        pixel.addEventListener('mousedown', setActiveColorMode);
-        pixelRow.appendChild(pixel);
+function createGridOfPixels(divisions) {
+
+    while (pixelGrid.firstChild) {
+        pixelGrid.removeChild(pixelGrid.firstChild);
     }
-    pixelGrid.appendChild(pixelRow);
+
+    // Calculate individual pixel width and heights.
+    let pixelWidth = totalGridDimensions / divisions;
+    let pixelHeight = totalGridDimensions / divisions;
+
+    for (let row = 0; row < divisions; row ++) {
+        const pixelRow = document.createElement('div');
+        pixelRow.style.display = 'flex';
+        for (let i = 0; i < divisions; i++) {
+            const pixel = document.createElement('div');
+            pixel.classList.add('pixel');
+            pixel.style.width = `${pixelWidth}px`;
+            pixel.style.height = `${pixelHeight}px`;
+            pixel.style.backgroundColor = 'rgb(255, 255, 255)';
+            pixel.addEventListener('mouseover', setActiveColorMode);
+            pixel.addEventListener('mousedown', setActiveColorMode);
+            pixelRow.appendChild(pixel);
+        }
+        // Append to pixelGrid container.
+        pixelGrid.appendChild(pixelRow);
+    }
 }
+
+createGridOfPixels(getGridDivs());
+
 
 const gridContainer = document.querySelector('.grid-container');
 gridContainer.appendChild(pixelGrid);
@@ -140,6 +150,9 @@ gridContainer.appendChild(pixelGrid);
 // Reset canvas pixels.
 resetButton = document.querySelector('.reset');
 resetButton.addEventListener('click', () => {
-    const pixelsToReset = pixelGrid.querySelectorAll('.pixel');
-    pixelsToReset.forEach(pixel => pixel.style.backgroundColor = 'rgb(255, 255, 255');
+    createGridOfPixels(getGridDivs());
 });
+// resetButton.addEventListener('click', () => {
+//     const pixelsToReset = pixelGrid.querySelectorAll('.pixel');
+//     pixelsToReset.forEach(pixel => pixel.style.backgroundColor = 'rgb(255, 255, 255');
+// });
