@@ -11,7 +11,7 @@ h1, h3 {
 }
 
 .main-container hr {
-    width: 25%;
+    width: 75%;
     height: 1.5px;
     border: 0px;
     background-color: black;
@@ -46,6 +46,7 @@ h1, h3 {
     border: 1px solid black;
     box-shadow: 5px 5px black;
     border-radius: 5px;
+    height: 30px;;
 }
 
 .palette .button-click {
@@ -78,6 +79,7 @@ h1, h3 {
 /* Alternative styling for button clicks. */
 .palette .hover {
     font-weight: bold;
+    transform: scale(1.05);
 }
 
 .grid-container {

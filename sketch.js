@@ -22,7 +22,7 @@ buttons.forEach(element => element.addEventListener('mouseup', () => {
 }));
 
 // Total width and height for grid in pixels.
-let totalGridDimensions = 350;
+let totalGridDimensions = 550;
 
 // Initial creation of grid.
 const pixelGrid = document.createElement('div');
@@ -114,6 +114,8 @@ function setActiveColorMode() {
 
 // Create individual pixels that populates the pixel grid.
 function createGridOfPixels(divisions) {
+
+    if (divisions == null) return
 
     while (pixelGrid.firstChild) {
         pixelGrid.removeChild(pixelGrid.firstChild);
