@@ -56,6 +56,7 @@ function changePixelToRainbow(e) {
     const randColor = `#${randColorNumber}`;
     e.target.style.backgroundColor = randColor;}
 
+    // 
 function changePixelToGreyShades(e) {
     if (e.type === 'mouseover' && !mouseDown) return
     const currentGrey = window.getComputedStyle( e.target ,null).getPropertyValue('background-color');
@@ -68,6 +69,17 @@ function changePixelToGreyShades(e) {
     e.target.style.backgroundColor = newColorCode;
 }
 
+// Get the active color mode button's text value.
+function getActiveColorButton() {
+    buttons.forEach(function(element) {
+        if (element.classList.contains('button-click')) {
+            colorMode = element.textContent;
+        }
+    });
+    return colorMode
+}
+
+// Primary event listener for pixels which gets the active color mode button and sets the associated color mode.
 function setActiveColorMode() {
     const activeColorMode = getActiveColorButton();
     const changePixels = pixelGrid.querySelectorAll('.pixel');
@@ -131,14 +143,3 @@ resetButton.addEventListener('click', () => {
     const pixelsToReset = pixelGrid.querySelectorAll('.pixel');
     pixelsToReset.forEach(pixel => pixel.style.backgroundColor = 'rgb(255, 255, 255');
 });
-
-function getActiveColorButton() {
-    buttons.forEach(function(element) {
-        if (element.classList.contains('button-click')) {
-            colorMode = element.textContent;
-        }
-    });
-    return colorMode
-}
-
-setActiveColorMode();
